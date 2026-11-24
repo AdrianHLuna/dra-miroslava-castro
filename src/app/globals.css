@@ -1,0 +1,136 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+/*
+ * Paleta real de marca (LOGO/PALETA DE COLOR DRA MIROSLAVA): lila/lavanda,
+ * rosa y teal son los 3 "colores principales" del isotipo real (silueta +
+ * aparato urogenital). Violeta es uno de los "colores secundarios" de la
+ * guía, usado aquí como acento mínimo de alarma/CTA final — nunca con el
+ * mismo peso que los 3 principales (AGENTS.md §5). Esta es la única
+ * combinación aplicada de forma visible; el resto de la guía (mauve, azul
+ * grisáceo, lila/rosa pálidos, gris) queda documentada aquí, sin aplicarse,
+ * por si el diseño cambia más adelante:
+ *   violeta #946CD3 · vino #C17494 · azul grisáceo #7999BE
+ *   azul-gris pálido #B2C8CE · lila pálido #E1C9F4 · rosa pálido #F4CEE3 · gris #C1C1C1
+ */
+:root {
+  --primary: oklch(0.65 0.08 320); /* #b498c4 lila/lavanda de marca */
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.74 0.09 357); /* #eb99b6 rosa de marca */
+  --secondary-foreground: oklch(0.24 0.03 357);
+  --accent: oklch(0.68 0.11 221); /* #44afd1 teal de marca (color del isotipo) */
+  --accent-foreground: oklch(0.99 0 0);
+  --alarm: oklch(0.52 0.19 303); /* #946cd3 violeta — uso mínimo, alarma/CTA final */
+  --alarm-foreground: oklch(0.99 0 0);
+  --background: oklch(0.985 0.006 320); /* blanco cálido con tinte lila, no blanco puro */
+  --surface: oklch(0.96 0.012 330); /* lila-crema muy suave para secciones alternas */
+  --foreground: oklch(0.21 0.045 320); /* plum muy oscuro, no negro neutro */
+  --muted: oklch(0.95 0.01 300);
+  --muted-foreground: oklch(0.47 0.03 300);
+  --border: oklch(0.89 0.018 310);
+
+  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-alarm: var(--alarm);
+  --color-alarm-foreground: var(--alarm-foreground);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/*
+ * Motivo del Hero: "flujo" — una línea continua animada (inspirada en el
+ * trazo de silueta del logotipo real, no una copia literal del isotipo
+ * completo como en otros sitios del registro) con un patrón de guiones que
+ * viaja de forma infinita a lo largo del trazo, nunca una sola vez al
+ * cargar. Concepto deliberado: el movimiento de "flujo" encaja con
+ * Urología Ginecológica sin ser literal ni incómodo. Ver HeroFlowMotif.tsx.
+ */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -520;
+  }
+}
+.flow-path {
+  stroke-dasharray: 10 18;
+  animation: flow-dash 9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-path {
+    animation: none;
+  }
+}
+
+/*
+ * EntityCard de este sitio: "pétalo" — una sola esquina grande y redondeada
+ * (no dos esquinas opuestas simétricas como en otros sitios del registro),
+ * con un "relleno" de color que sube desde abajo al hover/focus en vez de
+ * zoom, escala, grayscale o brackets — mecanismo de hover nuevo.
+ */
+/* Marco "gota" de la foto del Hero/About — silueta orgánica con un solo
+   vértice vivo (radio 0% en la esquina superior izquierda, el resto
+   redondeado al 50%), evocando una gota de agua/flujo — deliberadamente
+   distinta del `.petal-card` de las tarjetas (una esquina grande, las
+   otras 3 casi rectas) y de cualquier blob/hexágono/anillo usado en otros
+   sitios del registro (AGENTS.md §1, hallazgo 2026-11-24). */
+.drop-frame {
+  border-radius: 0% 58% 58% 58%;
+}
+
+.petal-card {
+  border-radius: 2.75rem 0.85rem 0.85rem 0.85rem;
+  position: relative;
+  overflow: hidden;
+}
+.petal-fill {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0%;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--accent) 16%, transparent),
+    transparent
+  );
+  transition: height 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.group:hover .petal-fill,
+.group:focus-within .petal-fill {
+  height: 100%;
+}
+
+/* Tarjeta de contacto/mapa: esquinas redondeadas completas, "flotando"
+   ligeramente sobre el fondo — tratamiento distinto del mapa contenido
+   junto a un riel lateral, repetido 3 veces seguidas en el registro. */
+.map-card {
+  border-radius: 2rem;
+  box-shadow: 0 18px 40px -22px color-mix(in oklch, var(--foreground) 35%, transparent);
+}
