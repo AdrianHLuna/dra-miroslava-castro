@@ -33,7 +33,7 @@ export const doctor: DoctorProfile = {
   schedule: "Lunes a viernes de 10:00 a 19:00. Sábados de 9:00 a 14:00.",
   openingHours: ["Mo-Fr 10:00-19:00", "Sa 09:00-14:00"],
   acceptingNewPatients: true,
-  photo: "/doctor.jpg",
+  photo: "/images/hero.jpg",
   bio:
     "La Dra. Miroslava Castro es médico ginecoobstetra con subespecialidad en Urología Ginecológica, enfocada en el diagnóstico y tratamiento de los trastornos del piso pélvico y las vías urinarias en la mujer, además de la atención integral de la salud ginecológica y obstétrica. A lo largo de su práctica clínica en la Ciudad de México ha atendido a más de 10,000 pacientes y realizado más de 5,000 procedimientos y cirugías, con más de 10 años de experiencia. Su consulta combina el seguimiento ginecológico y obstétrico habitual —desde el control del embarazo hasta la prevención oncológica— con el manejo especializado de condiciones que suelen pasar desapercibidas o se viven con pena, como la incontinencia urinaria, el prolapso de órganos pélvicos o la vejiga hiperactiva.",
   philosophy:

@@ -10,6 +10,8 @@ interface DoctorPhotoProps {
   alt: string;
   /** La etiqueta de subespecialidad solo tiene sentido en "Sobre la doctora" — en el Hero ese dato ya aparece en el texto junto a la foto. */
   showTag?: boolean;
+  priority?: boolean;
+  objectPositionClassName?: string;
 }
 
 /**
@@ -19,7 +21,13 @@ interface DoctorPhotoProps {
  * hallazgo 2026-11-24). En su lugar, una etiqueta real de subespecialidad
  * fija en la esquina, sin animación de bob.
  */
-export default function DoctorPhoto({ src, alt, showTag = true }: DoctorPhotoProps) {
+export default function DoctorPhoto({
+  src,
+  alt,
+  showTag = true,
+  priority = false,
+  objectPositionClassName = "object-center",
+}: DoctorPhotoProps) {
   const [failed, setFailed] = useState(!src);
 
   return (
@@ -38,7 +46,8 @@ export default function DoctorPhoto({ src, alt, showTag = true }: DoctorPhotoPro
             src={src as string}
             alt={alt}
             fill
-            className="object-cover"
+            priority={priority}
+            className={`object-cover ${objectPositionClassName}`}
             sizes="(max-width: 1024px) 100vw, 33vw"
             onError={() => setFailed(true)}
           />

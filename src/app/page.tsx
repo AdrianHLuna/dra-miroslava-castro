@@ -68,7 +68,13 @@ export default function Home() {
               <HeroFlowMotif />
             </div>
             <div className="absolute inset-[6%]">
-              <DoctorPhoto src={doctor.photo} alt={`${doctor.title} ${doctor.name}`} showTag={false} />
+              <DoctorPhoto
+                src={doctor.photo}
+                alt={`${doctor.title} ${doctor.name}`}
+                showTag={false}
+                priority
+                objectPositionClassName="object-[center_35%]"
+              />
             </div>
           </div>
         </div>
@@ -89,7 +95,7 @@ export default function Home() {
 
       <section aria-labelledby="about-heading" className="px-4 py-20">
         <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1fr_1.6fr] md:items-start">
-          <DoctorPhoto src={doctor.photo} alt={`${doctor.title} ${doctor.name}`} />
+          <DoctorPhoto src="/images/aboutme.jpg" alt={`${doctor.title} ${doctor.name} en su consultorio`} />
           <div>
             <h2 id="about-heading" className="font-heading text-2xl font-bold text-foreground md:text-3xl">
               Sobre {doctor.title} {doctor.name}
